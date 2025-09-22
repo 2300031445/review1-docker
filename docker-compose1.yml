@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend 
+      dockerfile: Dockerfile
+    container_name: vote-frontend
+    ports:
+      - "2026:8080"
+    depends_on:
+      - backend
+    networks:
+      - vote-net
+
+  backend:
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile
+    container_name: vote-backend
+    ports:
+      - "2027:8080"
+    networks:
+      - vote-net
+
+networks:
+  vote-net:
+    driver: bridge
